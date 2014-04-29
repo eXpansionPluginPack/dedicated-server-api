@@ -244,9 +244,8 @@ class Connection
 			throw new InvalidArgumentException('vote->cmdParam = '.print_r($vote->cmdParam, true));
 		}
 
-		$tmpCmd = Xmlrpc\Request::encode($vote->cmdName, $vote->cmdName);
-
-		return $this->execute(ucfirst(__FUNCTION__).'Ex', array($tmpCmd, $ratio, $timeout, $voters), $multicall);
+		$tmpCmd = new Xmlrpc\RawRequest($vote->cmdName, $vote->cmdParam);						
+		return $this->execute(ucfirst(__FUNCTION__).'Ex', array($tmpCmd->getXml(), $ratio, $timeout, $voters), $multicall);
 	}
 
 	/**
@@ -281,9 +280,9 @@ class Connection
 			throw new InvalidArgumentException('voters = '.print_r($voters, true));
 		}
 
-		$tmpCmd = Xmlrpc\Request::encode('Kick', array($login));
+		$tmpCmd = new Xmlrpc\RawRequest('Kick', array($login));
 
-		return $this->execute('CallVoteEx', array($tmpCmd, $ratio, $timeout, $voters), $multicall);
+		return $this->execute('CallVoteEx', array($tmpCmd->getXml(), $ratio, $timeout, $voters), $multicall);
 	}
 
 	/**
@@ -318,9 +317,9 @@ class Connection
 			throw new InvalidArgumentException('voters = '.print_r($voters, true));
 		}
 
-		$tmpCmd = Xmlrpc\Request::encode('Ban', array($login));
+		$tmpCmd = new Xmlrpc\RawRequest('Ban', array($login));
 
-		return $this->execute('CallVoteEx', array($tmpCmd, $ratio, $timeout, $voters), $multicall);
+		return $this->execute('CallVoteEx', array($tmpCmd->getXml(), $ratio, $timeout, $voters), $multicall);
 	}
 
 	/**
@@ -350,9 +349,9 @@ class Connection
 			throw new InvalidArgumentException('voters = '.print_r($voters, true));
 		}
 
-		$tmpCmd = Xmlrpc\Request::encode('RestartMap', array());
+		$tmpCmd = new Xmlrpc\RawRequest('RestartMap', array());
 
-		return $this->execute('CallVoteEx', array($tmpCmd, $ratio, $timeout, $voters), $multicall);
+		return $this->execute('CallVoteEx', array($tmpCmd->getXml(), $ratio, $timeout, $voters), $multicall);
 	}
 
 	/**
@@ -382,9 +381,9 @@ class Connection
 			throw new InvalidArgumentException('voters = '.print_r($voters, true));
 		}
 
-		$tmpCmd = Xmlrpc\Request::encode('NextMap', array());
+		$tmpCmd = new Xmlrpc\RawRequest('NextMap', array());
 
-		return $this->execute('CallVoteEx', array($tmpCmd, $ratio, $timeout, $voters), $multicall);
+		return $this->execute('CallVoteEx', array($tmpCmd->getXml(), $ratio, $timeout, $voters), $multicall);
 	}
 
 	/**
