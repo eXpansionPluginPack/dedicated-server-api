@@ -19,10 +19,12 @@ class Base64
 	{
 		$this->scalar = $data;
 	}
-	
-	function getString() {
-	    return $this->scalar;
+
+	/**
+	 * @return string
+	 */
+	function __toString()
+	{
+		return $this->scalar;
 	}
 }
-
-?>

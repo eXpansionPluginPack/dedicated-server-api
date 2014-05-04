@@ -17,8 +17,8 @@ class GbxRemote
 
 	private $socket;
 	private $timeouts = array(
-		'read' => 1000,
-		'write' => 1000
+		'read' => 5000,
+		'write' => 5000
 	);
 	private $requestHandle;
 	private $callbacksBuffer = array();
@@ -43,10 +43,10 @@ class GbxRemote
 
 	/**
 	 * Change timeouts
-	 * @param int $read read timeout (in ms), null or 0 to leave unchanged
-	 * @param int $write write timeout (in ms), null or 0 to leave unchanged
+	 * @param int $read read timeout (in ms), 0 to leave unchanged
+	 * @param int $write write timeout (in ms), 0 to leave unchanged
 	 */
-	function setTimeouts($read=null, $write=null)
+	function setTimeouts($read=0, $write=0)
 	{
 		if($read)
 			$this->timeouts['read'] = $read;
@@ -184,7 +184,10 @@ class GbxRemote
 	 */
 	private function flush($waitResponse=false)
 	{
-		$n = @stream_select($r=array($this->socket), $w=null, $e=null, 0);
+		$r = array($this->socket);
+		$w = null;
+		$e = null;
+		$n = @stream_select($r, $w, $e, 0);
 		while($waitResponse || $n > 0)
 		{
 			list($handle, $xml) = $this->readMessage();
@@ -202,7 +205,7 @@ class GbxRemote
 			}
 
 			if(!$waitResponse)
-				$n = @stream_select($r=array($this->socket), $w=null, $e=null, 0);
+				$n = @stream_select($r, $w, $e, 0);
 		};
 	}
 
@@ -302,5 +305,3 @@ class MessageException extends Exception
 	const REQUEST_TOO_LARGE  = 1;
 	const RESPONSE_TOO_LARGE = 2;
 }
-
-?>
