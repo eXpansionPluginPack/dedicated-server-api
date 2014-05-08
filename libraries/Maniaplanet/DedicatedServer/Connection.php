@@ -448,7 +448,7 @@ class Connection
 	 */
 	function setCallVoteRatiosEx($replaceAll, $ratios, $multicall=false)
 	{
-		return $this->setCallVoteRatios($ratios, $replaceAll, $multicall);
+		return $this->setCallVoteRatios($replaceAll,$ratios, $multicall);
 	}
 
 	/**
