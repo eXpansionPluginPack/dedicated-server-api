@@ -9,14 +9,15 @@ namespace Maniaplanet\DedicatedServer\Structures;
 
 class VoteRatio extends AbstractStructure
 {
+	const COMMAND_DEFAULT         = '*';
 	const COMMAND_SCRIPT_SETTINGS = 'SetModeScriptSettingsAndCommands';
-	const COMMAND_NEXT_MAP = 'NextMap';
-	const COMMAND_JUMP_MAP = 'JumpToMapIdent';
-	const COMMAND_SET_NEXT_MAP = 'SetNextMapIdent';
-	const COMMAND_RESTART_MAP = 'RestartMap';
-	const COMMAND_TEAM_BALANCE = 'AutoTeamBalance';
-	const COMMAND_KICK = 'Kick';
-	const COMMAND_BAN = 'Ban';
+	const COMMAND_NEXT_MAP        = 'NextMap';
+	const COMMAND_JUMP_MAP        = 'JumpToMapIdent';
+	const COMMAND_SET_NEXT_MAP    = 'SetNextMapIdent';
+	const COMMAND_RESTART_MAP     = 'RestartMap';
+	const COMMAND_TEAM_BALANCE    = 'AutoTeamBalance';
+	const COMMAND_KICK            = 'Kick';
+	const COMMAND_BAN             = 'Ban';
 
 	/** @var string '*' for default */
 	public $command;
@@ -37,6 +38,7 @@ class VoteRatio extends AbstractStructure
 	}
 
 	/**
+	 * @internal
 	 * @return bool
 	 */
 	function isValid()
@@ -47,6 +49,7 @@ class VoteRatio extends AbstractStructure
 	}
 
 	/**
+	 * @internal
 	 * @param float $ratio
 	 * @return bool
 	 */
